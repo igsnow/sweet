@@ -50,92 +50,92 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
-  import merge from 'webpack-merge'
+    import {mapState, mapActions} from 'vuex'
+    import merge from 'webpack-merge'
 
-  export default {
-    data() {
-      return {
-        keyword: '',
-        navIndex: 0,
-        nav: [
-          {name: '文章', path: '/', icon: 'el-icon-house'},
-          // {name: '专栏', path: '/book', icon: 'el-icon-reading\n'},
-          {name: '关于', path: '/about', icon: 'el-icon-chat-round'},
-        ]
-      }
-    },
-    mounted() {
-    },
-    computed: {
-      ...mapState({})
-    },
-    methods: {
-      ...mapActions({
-        searchArticle: 'article/searchArticle',
-        showUserManager: 'user/showUserManager',
-        getArticleList: 'article/getArticleList'
-      }),
+    export default {
+        data() {
+            return {
+                keyword: '',
+                navIndex: 0,
+                nav: [
+                    {name: '文章', path: '/', icon: 'el-icon-house'},
+                    // {name: '专栏', path: '/book', icon: 'el-icon-reading\n'},
+                    {name: '关于', path: '/about', icon: 'el-icon-chat-round'},
+                ]
+            }
+        },
+        mounted() {
+        },
+        computed: {
+            ...mapState({})
+        },
+        methods: {
+            ...mapActions({
+                searchArticle: 'article/searchArticle',
+                showUserManager: 'user/showUserManager',
+                getArticleList: 'article/getArticleList'
+            }),
 
-      /**
-       * 切换导航栏
-       */
-      changeNav(path, index) {
-        this.$router.replace({
-          query: merge({})
-        });
-        this.navIndex = index;
-        this.toPath(path);
-        this.getArticle();
-      },
-      /**
-       * 搜索文章
-       * @returns 文章列表
-       */
-      async getSearchArticle() {
-        const keyword = this.keyword;
-        if (!keyword) return false;
+            /**
+             * 切换导航栏
+             */
+            changeNav(path, index) {
+                this.$router.replace({
+                    query: merge({})
+                });
+                this.navIndex = index;
+                this.toPath(path);
+                this.getArticle();
+            },
+            /**
+             * 搜索文章
+             * @returns 文章列表
+             */
+            async getSearchArticle() {
+                const keyword = this.keyword;
+                if (!keyword) return false;
 
-        const path = this.$route.path;
-        let articlePath = '/';
+                const path = this.$route.path;
+                let articlePath = '/';
 
-        if (path !== articlePath) {
-          articlePath += `?keyword=${keyword}`;
-          this.toPath(articlePath)
+                if (path !== articlePath) {
+                    articlePath += `?keyword=${keyword}`;
+                    this.toPath(articlePath)
 
-        } else {
-          this.$router.replace({
-            query: merge(this.$route.query, {
-              keyword
-            })
-          });
-          this.getArticle();
+                } else {
+                    this.$router.replace({
+                        query: merge(this.$route.query, {
+                            keyword
+                        })
+                    });
+                    this.getArticle();
+                }
+            },
+            /**
+             * 获取文章
+             *
+             * @returns 文章列表
+             */
+            async getArticle() {
+                const {page, desc, category_id, keyword} = this.$route.query;
+
+                await this.getArticleList({
+                    page,
+                    desc,
+                    keyword,
+                    category_id
+                });
+            },
+            /**
+             * 路由调整
+             * @param path 路由地址
+             */
+            toPath(path) {
+                this.$router.push(path);
+            }
         }
-      },
-      /**
-       * 获取文章
-       *
-       * @returns 文章列表
-       */
-      async getArticle() {
-        const {page, desc, category_id, keyword} = this.$route.query;
-
-        await this.getArticleList({
-          page,
-          desc,
-          keyword,
-          category_id
-        });
-      },
-      /**
-       * 路由调整
-       * @param path 路由地址
-       */
-      toPath(path) {
-        this.$router.push(path);
-      }
     }
-  }
 </script>
 
 <style lang="scss" scoped>

@@ -13,3 +13,4 @@ app.use(parser());
 InitManager.initCore(app);
 
 app.listen(3000);
+logger.info('server run at port 3000...');

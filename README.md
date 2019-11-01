@@ -71,7 +71,7 @@ $ npm install
 # 运行服务
 $ npm run dev
 
-# 打开浏览器输入回车：http://localhost:3000
+# 打开浏览器输入回车：http://localhost:1017
 
 // 前端项目使用
 1. 在根目录下进入web项目：cd web，

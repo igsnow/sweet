@@ -8,7 +8,8 @@
   ],
   "ignore_watch": [
     "node_modules",
-    "logs"
+    "logs",
+    "cheese.log"
   ],
   "watch_options": {
     "followSymlinks": false

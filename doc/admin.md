@@ -1,6 +1,6 @@
 ## 接口前缀
 ```shell
-http://localhost:3000/v1
+http://localhost:1017/v1
 ```
 
 # 管理员
@@ -69,7 +69,7 @@ function _encode() {
 
 // 代码示例：重点看header携带 Authorization Basic + token
 ajax({
-  url: 'http://localhost:3000/v1/admin/auth',
+  url: 'http://localhost:1017/v1/admin/auth',
   method: 'GET',
   success: res => {
     console.log(res.data)

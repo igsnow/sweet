@@ -1,16 +1,15 @@
-const Koa = require('koa')
-const InitManager = require('./core/init')
-const parser = require('koa-bodyparser')
+const Koa = require('koa');
+const InitManager = require('./core/init');
+const parser = require('koa-bodyparser');
 const cors = require('@koa/cors');
+const catchError = require('./middlewares/exception');
+const logger = require('./config/logConfig');
+const app = new Koa();
 
-const catchError = require('./middlewares/exception')
+app.use(cors());
+app.use(catchError);
+app.use(parser());
 
-const app = new Koa()
+InitManager.initCore(app);
 
-app.use(cors())
-app.use(catchError)
-app.use(parser())
-
-InitManager.initCore(app)
-
-app.listen(3000)
+app.listen(3000);

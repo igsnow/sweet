@@ -19,12 +19,12 @@ const io = require('socket.io')(server);
 let userNum = 0;
 io.on('connection', function (socket) {
     userNum++;
-    logger.info('a user is connected... totalUser: ' + userNum);
+    logger.info('a user is connected... userNum: ' + userNum);
     io.emit('total', userNum);
     // 监听链接是否断开
     socket.on('disconnect', function () {
         userNum--;
-        logger.info('a user is disconnect... totalUser: ' + userNum);
+        logger.info('a user is disconnect... userNum: ' + userNum);
         io.emit('total', userNum);
     })
 });

@@ -2,7 +2,7 @@
   <section class="Footer-wrap">
     <footer class="footer-inner">
       <p>www.zhangzhiyong.club - Blog Copyright&copy; Author igsnow zzy716810918@gmail.com</p>
-      <p><a href="http://www.miit.gov.cn" target="_blank">浙ICP备18001135号-3</a></p>
+      <p><a href="http://www.miit.gov.cn" target="_blank">浙ICP备18056730号-1</a></p>
     </footer>
   </section>
 </template>

@@ -27,7 +27,7 @@
             }
         },
         created() {
-            const socket = io('');
+            const socket = io('ws://127.0.0.1:1017');
             socket.on('total', function (data) {
                 console.log(data);
             });

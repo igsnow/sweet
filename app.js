@@ -6,24 +6,32 @@ const catchError = require('./middlewares/exception');
 const logger = require('./config/logConfig');
 const app = new Koa();
 
-
 app.use(cors());
 app.use(catchError);
 app.use(parser());
 
 InitManager.initCore(app);
 
-app.listen(1017);
-logger.info(`server run at port ${PORT}...`);
-
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
+
+// 监控博客当前页面的总人数
+let userNum = 0;
 io.on('connection', function (socket) {
-    logger.info('a user is connected...');
-    io.emit('total', 'add');
+    userNum++;
+    logger.info('a user is connected... totalUser: ' + userNum);
+    io.emit('total', userNum);
     // 监听链接是否断开
     socket.on('disconnect', function () {
-        logger.info('a user is disconnect...');
-        io.emit('total', 'red');
+        userNum--;
+        logger.info('a user is disconnect... totalUser: ' + userNum);
+        io.emit('total', userNum);
     })
 });
+
+server.listen(1017);
+logger.info(`server run at port 1017...`);
+
+
+
+
